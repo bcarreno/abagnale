@@ -13,17 +13,8 @@ require 'uri'
 
 logger = Logger.new(STDOUT)
 
-db = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/abagnale')
-
-ActiveRecord::Base.establish_connection(
-  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-  :host     => db.host,
-  :username => db.user,
-  :password => db.password,
-  :database => db.path[1..-1],
-  :encoding => 'utf8'
-  # :min_messages => 'warning'
-)
+dbconfig = YAML::load(File.open('database.yml'))
+ActiveRecord::Base.establish_connection(dbconfig)
 
 # ActiveRecord::Base.logger = Logger.new(STDOUT)
 
