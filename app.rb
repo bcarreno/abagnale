@@ -84,7 +84,7 @@ helpers do
       when "credit"
         txrefnum = doc.xpath('//ns:litleTxnId', 'ns' => ns).inner_text
         tx_id = txrefnum.split('-').last
-        Transaction.find(tx_id).update_attributes(:refunded_at => Time.now)
+        #Transaction.find(tx_id).update_attributes(:refunded_at => Time.now)
         body = File.read(File.dirname(__FILE__) + "/fixtures/litle/credit_success.xml")
       when "batchRequest"
         transactions = []
